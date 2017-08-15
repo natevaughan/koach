@@ -2,8 +2,6 @@ package com.natevaughan.koach.demo
 
 import com.natevaughan.koach.workout.Workout
 import com.natevaughan.koach.workout.interval.Activity
-import com.natevaughan.koach.workout.interval.Distance
-import org.omg.PortableInterceptor.ACTIVE
 
 /**
  * Created by nate on 7/23/17
@@ -14,12 +12,10 @@ fun distanceReport(workout: Workout) : String {
     val run = ActivitySummary(Activity.RUN)
     val bike = ActivitySummary(Activity.BIKE)
     for (set in workout.activitySets) {
-        for (interval in set.intervals) {
-            when (interval.activity) {
-                Activity.BIKE -> bike.totalDistance += interval.distance.metersEquivalent
-                Activity.RUN -> run.totalDistance += interval.distance.metersEquivalent
-                Activity.SWIM -> swim.totalDistance += interval.distance.metersEquivalent
-            }
+        when (set.activity) {
+            Activity.BIKE -> bike.totalDistance += set.totalDistance.metersEquivalent
+            Activity.RUN -> run.totalDistance += set.totalDistance.metersEquivalent
+            Activity.SWIM -> swim.totalDistance += set.totalDistance.metersEquivalent
         }
     }
 

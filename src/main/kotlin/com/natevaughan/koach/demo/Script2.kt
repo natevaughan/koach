@@ -14,11 +14,11 @@ fun main(args: Array<String>) {
     val interval2 = WorkoutInterval(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1,29))
     val interval3 = WorkoutInterval(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1,28))
 
-    val swimSet = ActivitySet(arrayOf(interval1, interval2, interval3))
+//    val swimSet = ActivitySet(arrayOf(interval1, interval2, interval3))
+//
+//    val workout = Workout(arrayListOf(swimSet))
 
-    val workout = Workout(arrayListOf(swimSet))
-
-    println(distanceReport(workout))
+//    println(distanceReport(workout))
 }
 
 fun oldMain(args: Array<String>) {

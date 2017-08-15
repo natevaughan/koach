@@ -3,26 +3,11 @@ package com.natevaughan.koach.cli
 import com.natevaughan.koach.workout.ActivitySet
 import com.natevaughan.koach.workout.interval.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
- * Created by nate on 7/20/17.
+ * Created by nate on 7/20/17
  */
-fun parseInterval(input: String): WorkoutInterval {
-    val parts = input.split(" ")
-    val activity = activity(parts[0])
-
-    return WorkoutInterval(activity, Distance(50.0, DistanceUnit.METERS), Time(2,30))
-}
-
-fun activity(input: String) : Activity {
-    for (act : Activity in Activity.values()) {
-        if (act.name.equals(input, true)) {
-            return act
-        }
-    }
-
-    throw RuntimeException("invalid activity: $input")
-}
 
 fun getAction(input: String) : Action {
     for (act : Action in Action.values()) {
@@ -35,24 +20,29 @@ fun getAction(input: String) : Action {
 }
 
 fun parseNewSet(scanner: Scanner): ActivitySet {
-    println("What type of set? ${Activity.values()}")
-
-    when (activity(scanner.next())) {
-        Activity.SWIM -> parseNewSwimSet(scanner)
-        else -> {
-            throw RuntimeException("Unrecognized Activity")
-        }
+    println("activity: [${Activity.values().joinToString(",")}]")
+    val activity = Activity.valueOf(scanner.next().toUpperCase())
+    println("distance: [distance:unit]")
+    val distance = distance(scanner.next())
+    println("time interval for each: [minutes:seconds]")
+    val time = parseTime(scanner.next())
+    println("please enter your intervals in the format [minutes:seconds]. Type END when done.")
+    val times: ArrayList<Time> = ArrayList()
+    var input: String = scanner.next()
+    while ("END" != input.toUpperCase()) {
+        times.add(parseTime(input))
+        input = scanner.next()
     }
-
+    println("set created.")
+    return ActivitySet(activity, distance, time, times.toTypedArray())
 }
 
-fun parseNewSwimSet(scanner: Scanner): ActivitySet {
-    println("What was the distance?")
-    val interval = scanner.next().toLong()
-    println("How many repetitions?")
-    val reps = scanner.next().toLong()
-    println("How many minutes:seconds?")
-    val time = parseTime(scanner.next())
+fun distance(input: String): Distance {
+    val parts = input.split(":")
+    if (parts.size == 2) {
+        return Distance(parts[0].toDouble(), parseDistanceUnit(parts[1]))
+    }
+    throw RuntimeException("Bad intervalTimeEach input: [$input] must conform to [minutes:seconds]")
 }
 
 fun parseTime(string: String): Time {
@@ -64,9 +54,15 @@ fun parseTime(string: String): Time {
             println("NumberFormatException: ${e.message}")
         }
     }
-    throw RuntimeException("Bad timeEach input: [$string] must conform to [minutes:seconds]")
+    throw RuntimeException("Bad intervalTimeEach input: [$string] must conform to [minutes:seconds]")
 }
 
-fun parseNewBikeSet() {
 
+fun parseDistanceUnit(input: String) : DistanceUnit {
+    for (unit: DistanceUnit in DistanceUnit.values()) {
+        if (unit.abbrev.equals(input, true) || unit.name.equals(input, true)) {
+            return unit
+        }
+    }
+    throw RuntimeException("Invalid input: $input")
 }

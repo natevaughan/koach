@@ -3,12 +3,16 @@ package com.natevaughan.koach.workout.interval
 /**
  * Created by nate on 7/2/17
  */
-data class Time(val minutes: Long, val seconds: Long) {
-    val SECONDS_PER_MINUTE = 60
+data class Time(val seconds: Long) {
 
-    val totalSeconds: Long = minutes * SECONDS_PER_MINUTE + seconds
+    constructor(minutes: Long, seconds: Long) : this(minutes * 60 + seconds)
+
+    val minutes: Long
+        get() {
+            return (seconds / 60.0).toLong()
+        }
 
     override fun toString() : String {
-        return "$minutes:${if (seconds < 10) "0" + seconds.toString() else seconds.toString()}"
+        return "$minutes:${if (seconds < 10) "0" + (seconds % 60).toString() else seconds.toString()}"
     }
 }

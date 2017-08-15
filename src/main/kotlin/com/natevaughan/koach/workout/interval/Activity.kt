@@ -7,4 +7,14 @@ enum class Activity {
     SWIM,
     BIKE,
     RUN;
+
+    fun parse(input: String) : Activity {
+        for (act : Activity in Activity.values()) {
+            if (act.name.equals(input, true)) {
+                return act
+            }
+        }
+
+        throw RuntimeException("Invalid activity: $input")
+    }
 }
