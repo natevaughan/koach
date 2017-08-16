@@ -1,7 +1,6 @@
 package com.natevaughan.koach.demo
 
-import com.natevaughan.koach.workout.ActivitySet
-import com.natevaughan.koach.workout.Workout
+import com.natevaughan.koach.workout.SimpleActivity
 import com.natevaughan.koach.workout.interval.*
 
 /**
@@ -10,11 +9,11 @@ import com.natevaughan.koach.workout.interval.*
 
 fun main(args: Array<String>) {
 
-    val interval1 = WorkoutInterval(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1,30))
-    val interval2 = WorkoutInterval(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1,29))
-    val interval3 = WorkoutInterval(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1,28))
+    val interval1 = SimpleActivity(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1, 30))
+    val interval2 = SimpleActivity(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1, 29))
+    val interval3 = SimpleActivity(Activity.SWIM, Distance(100.0, DistanceUnit.METERS), Time(1, 28))
 
-//    val swimSet = ActivitySet(arrayOf(interval1, interval2, interval3))
+//    val swimSet = IntervalSet(arrayOf(interval1, interval2, interval3))
 //
 //    val workout = Workout(arrayListOf(swimSet))
 

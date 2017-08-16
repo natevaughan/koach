@@ -3,7 +3,7 @@ package com.natevaughan.koach
 import com.natevaughan.koach.cli.Action
 import com.natevaughan.koach.cli.getAction
 import com.natevaughan.koach.cli.parseNewSet
-import com.natevaughan.koach.workout.ActivitySet
+import com.natevaughan.koach.demo.distanceReport
 import com.natevaughan.koach.workout.Workout
 import java.util.*
 
@@ -27,11 +27,14 @@ fun main(args: Array<String>) {
         }
 
         when (next) {
-            Action.VIEW -> println(workout.toString())
+            Action.VIEW -> {
+                println(distanceReport(workout))
+                println(workout.toString())
+            }
             Action.QUIT -> println("goodbye")
             Action.SET -> {
                 try {
-                    workout.activitySets.add(parseNewSet(scanner))
+                    workout.activities.add(parseNewSet(scanner))
                 } catch (e: Exception) {
                     println("Error creating new set: ${e.message}")
                 }

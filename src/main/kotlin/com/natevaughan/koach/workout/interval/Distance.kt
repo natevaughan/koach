@@ -5,8 +5,6 @@ package com.natevaughan.koach.workout.interval
  */
 data class Distance(val distance: Double, val distanceUnit: DistanceUnit) {
 
-
-
     val metersEquivalent: Double
         get() = distanceUnit.metersConversion * distance
 

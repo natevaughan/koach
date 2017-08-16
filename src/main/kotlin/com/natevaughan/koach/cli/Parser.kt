@@ -1,6 +1,6 @@
 package com.natevaughan.koach.cli
 
-import com.natevaughan.koach.workout.ActivitySet
+import com.natevaughan.koach.workout.IntervalSet
 import com.natevaughan.koach.workout.interval.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -19,10 +19,10 @@ fun getAction(input: String) : Action {
     throw RuntimeException("invalid getAction: $input")
 }
 
-fun parseNewSet(scanner: Scanner): ActivitySet {
+fun parseNewSet(scanner: Scanner): IntervalSet {
     println("activity: [${Activity.values().joinToString(",")}]")
     val activity = Activity.valueOf(scanner.next().toUpperCase())
-    println("distance: [distance:unit]")
+    println("distanceEach: [distanceEach:unit]")
     val distance = distance(scanner.next())
     println("time interval for each: [minutes:seconds]")
     val time = parseTime(scanner.next())
@@ -34,7 +34,7 @@ fun parseNewSet(scanner: Scanner): ActivitySet {
         input = scanner.next()
     }
     println("set created.")
-    return ActivitySet(activity, distance, time, times.toTypedArray())
+    return IntervalSet(activity, distance, time, times.toTypedArray())
 }
 
 fun distance(input: String): Distance {
