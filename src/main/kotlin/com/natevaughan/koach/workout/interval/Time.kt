@@ -13,6 +13,6 @@ data class Time(val seconds: Long) {
         }
 
     override fun toString() : String {
-        return "$minutes:${if (seconds < 10) "0" + (seconds % 60).toString() else seconds.toString()}"
+        return "$minutes:${if ((seconds % 60) < 10) "0" + (seconds % 60).toString() else (seconds % 60).toString()}"
     }
 }

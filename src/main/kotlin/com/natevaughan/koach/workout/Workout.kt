@@ -13,11 +13,10 @@ class Workout (val localDate: LocalDate = LocalDate.now()) {
     val activities: ArrayList<WorkoutActivity> = ArrayList()
 
     override fun toString(): String {
-        var i = 1
+        var i = 0
         val sb = StringBuilder("Workout $localDate \n")
-        sb.append("Set ")
-        sb.append(i).append(":")
-        activities.forEach { ++i; sb.append("  $it") }
+        activities.forEach { ++i;
+            sb.append("Set ").append(i).append(":").append("  $it\n") }
         return sb.toString()
     }
 }

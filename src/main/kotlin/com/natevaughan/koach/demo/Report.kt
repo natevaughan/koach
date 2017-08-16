@@ -29,7 +29,7 @@ fun distanceReport(workout: Workout) : String {
 data class ActivitySummary(val activity: Activity, var totalDistance: Double = 0.0) {
     override fun toString(): String {
         val normalizedDistance = when {
-            totalDistance > 1600.0 -> Distance(totalDistance / DistanceUnit.MILES.metersConversion, DistanceUnit.MILES)
+            totalDistance > 1599.7 -> Distance(totalDistance / DistanceUnit.MILES.metersConversion, DistanceUnit.MILES)
             else -> Distance(totalDistance, DistanceUnit.METERS)
         }
 
