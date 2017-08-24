@@ -4,11 +4,16 @@ import com.natevaughan.koach.workout.Workout
 import com.natevaughan.koach.workout.interval.Activity
 import com.natevaughan.koach.workout.interval.Distance
 import com.natevaughan.koach.workout.interval.DistanceUnit
+import org.slf4j.LoggerFactory
+import java.time.LocalDate
 
 /**
  * Created by nate on 7/23/17
  */
 fun distanceReport(workout: Workout) : String {
+    val log = LoggerFactory.getLogger(object{}::class.java)
+
+    log.info("Building distance report")
     val sb = StringBuilder()
     val swim = ActivitySummary(Activity.SWIM)
     val run = ActivitySummary(Activity.RUN)

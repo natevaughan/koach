@@ -1,7 +1,5 @@
 package com.natevaughan.koach.demo
 
-import org.apache.tomcat.util.buf.HexUtils
-
 /**
 * Created by nate on 7/23/17
 */
@@ -14,7 +12,7 @@ enum class Color(val r: Int, val g: Int, val b: Int) {
     ORANGE(255, 165, 0);
 
     fun rgb(): Int = (r * 256 + g) * 256 + b
-    fun rgbHexString(): String = HexUtils.toHexString(byteArrayOf(r.toByte(), g.toByte(), b.toByte()))
+//    fun rgbHexString(): String = HexUtils.toHexString(byteArrayOf(r.toByte(), g.toByte(), b.toByte()))
 }
 
 

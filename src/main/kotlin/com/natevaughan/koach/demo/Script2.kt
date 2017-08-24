@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 }
 
 fun oldMain(args: Array<String>) {
-    println(Color.ORANGE.rgbHexString())
+    println(Color.ORANGE)
     println(mnemonic(Color.BLUE))
     println(mix(Color.BLUE,Color.YELLOW))
     println(mix(Color.BLUE,Color.ORANGE))

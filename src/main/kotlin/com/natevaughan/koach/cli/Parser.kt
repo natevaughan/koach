@@ -2,6 +2,7 @@ package com.natevaughan.koach.cli
 
 import com.natevaughan.koach.workout.IntervalSet
 import com.natevaughan.koach.workout.interval.*
+import org.slf4j.LoggerFactory
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -20,6 +21,9 @@ fun getAction(input: String) : Action {
 }
 
 fun parseNewSet(scanner: Scanner): IntervalSet {
+    val log = LoggerFactory.getLogger(object{}::class.java)
+    log.info("Creating new set")
+
     println("activity: [${Activity.values().joinToString(",")}]")
     val activity = Activity.valueOf(scanner.next().toUpperCase())
     println("distanceEach: [distanceEach:unit]")

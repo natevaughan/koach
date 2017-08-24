@@ -1,7 +1,6 @@
 package com.natevaughan.koach.workout.interval
 
 import java.text.DecimalFormat
-import java.text.NumberFormat
 
 /**
  * Created by nate on 7/20/17
