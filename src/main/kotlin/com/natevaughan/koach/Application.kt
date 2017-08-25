@@ -7,8 +7,8 @@ import com.natevaughan.koach.demo.distanceReport
 import com.natevaughan.koach.workout.Workout
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.time.LocalDate
 import java.util.*
+import net.logstash.logback.argument.StructuredArguments.*
 
 /**
  * Created by nate on 6/26/17
@@ -16,43 +16,60 @@ import java.util.*
 class Application {
     fun start() {
 
+        var status = "normal"
+
         val log: Logger = LoggerFactory.getLogger(javaClass)
 
-        log.info("Application startup")
+        try {
 
-        val scanner = Scanner(System.`in`)
-        var next = Action.VIEW
-        var input: List<String>
+            log.info("{}", entries(mapOf(
+                    Pair("application_event", "application start")
+            )))
 
-        val workout = Workout()
+            val scanner = Scanner(System.`in`)
+            var next = Action.VIEW
+            var input: List<String>
 
-        while (next != Action.QUIT) {
-            input = scanner.next().split(" ")
-            next = try {
-                getAction(input[0])
-            } catch (e: Exception) {
-                log.warn("error parsing input: ${e.message}")
-                println("bad input, please try again")
-                throw e
-            }
+            val workout = Workout()
 
-            when (next) {
-                Action.VIEW -> {
-                    println(distanceReport(workout))
-                    println(workout.toString())
+            while (next != Action.QUIT) {
+                input = scanner.next().split(" ")
+                next = try {
+                    getAction(input[0])
+                } catch (e: Exception) {
+                    log.warn("{}", entries(mapOf(
+                            Pair("error_type", "parse error"),
+                            Pair("message", e.message)
+                    )))
+                    println("bad input, please try again")
+                    throw e
                 }
-                Action.QUIT -> println("goodbye")
-                Action.SET -> {
-                    try {
-                        workout.activities.add(parseNewSet(scanner))
-                    } catch (e: Exception) {
-                        println("Error creating new set: ${e.message}")
+
+                when (next) {
+                    Action.VIEW -> {
+                        println(distanceReport(workout))
+                        println(workout.toString())
+                    }
+                    Action.QUIT -> println("goodbye")
+                    Action.SET -> {
+                        try {
+                            workout.activities.add(parseNewSet(scanner))
+                        } catch (e: Exception) {
+                            println("Error creating new set: ${e.message}")
+                        }
+                    }
+                    else -> {
+                        println("todo")
                     }
                 }
-                else -> {
-                    println("todo")
-                }
             }
+        } catch (e: Exception) {
+            status = "exception"
+        } finally {
+            log.info("Application shut down normally", entries(mapOf(
+                    Pair("application_event", "application shutdown"),
+                    Pair("event_status", status)
+            )))
         }
     }
 }
