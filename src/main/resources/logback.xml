@@ -18,11 +18,10 @@
     <providers>
       <timestamp/>
       <message/>
-      <version/>
+      <version>42</version>
+      <app>koach</app>
       <loggerName/>
       <threadName/>
-      <context/>
-      <contextName/>
       <logstashMarkers/>
       <arguments/>
       <logLevel/>

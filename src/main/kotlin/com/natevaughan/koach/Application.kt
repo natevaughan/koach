@@ -37,7 +37,7 @@ class Application {
                 next = try {
                     getAction(input[0])
                 } catch (e: Exception) {
-                    log.warn("{}", entries(mapOf(
+                    log.warn("bad input, ${input[0]}", entries(mapOf(
                             Pair("error_type", "parse error"),
                             Pair("message", e.message)
                     )))
@@ -55,11 +55,19 @@ class Application {
                         try {
                             workout.activities.add(parseNewSet(scanner))
                         } catch (e: Exception) {
+                            log.warn("{}", entries(mapOf(
+                                    Pair("error_type", "parse error"),
+                                    Pair("message", e.message)
+                            )))
                             println("Error creating new set: ${e.message}")
                         }
                     }
                     else -> {
                         println("todo")
+                        log.warn("$next has not yet been implemented", entries(mapOf(
+                                Pair("error_type", "not implemented"),
+                                Pair("feature","$next")
+                        )))
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.natevaughan.koach.demo
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.natevaughan.koach.workout.Workout
 import com.natevaughan.koach.workout.interval.Activity
 import com.natevaughan.koach.workout.interval.Distance
@@ -16,6 +17,9 @@ import java.time.LocalDate
 fun distanceReport(workout: Workout) : String {
     val log = LoggerFactory.getLogger(object{}::class.java)
 
+
+    val om = ObjectMapper()
+
     val sb = StringBuilder()
     val swim = ActivitySummary(Activity.SWIM)
     val run = ActivitySummary(Activity.RUN)
@@ -29,10 +33,10 @@ fun distanceReport(workout: Workout) : String {
     }
 
     sb.append(swim).append(bike).append(run)
-    log.info("{}", entries(mapOf(
-            Pair("swim", fields(swim)),
-            Pair("bike", fields(bike)),
-            Pair("run", fields(run))
+    log.info("Workout report generated", om.writeValueAsString((mapOf(
+            Pair("swim", swim),
+            Pair("bike", bike),
+            Pair("run", run))
     )))
 
     return sb.toString()

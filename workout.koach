@@ -7,7 +7,6 @@ bike
 2:50
 3:03
 end
-view
 set
 swim
 1000:m
@@ -21,5 +20,6 @@ run
 6:36
 7:02
 7:01
+end
 view
 quit
