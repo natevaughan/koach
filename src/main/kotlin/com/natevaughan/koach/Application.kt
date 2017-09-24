@@ -1,3 +1,5 @@
+@file:JvmName("Application")
+
 package com.natevaughan.koach
 
 import com.natevaughan.koach.cli.Action
@@ -13,17 +15,19 @@ import net.logstash.logback.argument.StructuredArguments.*
 /**
  * Created by nate on 6/26/17
  */
-class Application {
-    fun start() {
+object Application {
+
+    val log: Logger = LoggerFactory.getLogger(javaClass)
+
+    @JvmStatic
+    fun main(args: Array<String>) {
 
         var status = "normal"
-
-        val log: Logger = LoggerFactory.getLogger(javaClass)
 
         try {
 
             log.info("{}", entries(mapOf(
-                    Pair("application_event", "application start")
+                    Pair("application_event", "application main")
             )))
 
             val scanner = Scanner(System.`in`)

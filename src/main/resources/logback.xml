@@ -50,6 +50,10 @@
 
   <root level="debug">
     <appender-ref ref="STDOUT" />
-    <appender-ref ref="logstash" />
   </root>
+
+
+  <logger name="com.rocketmiles.hotelsupply.logging.ElkLogger" level="INFO" >
+    <appender-ref ref="logstash" />
+  </logger>
 </configuration>
